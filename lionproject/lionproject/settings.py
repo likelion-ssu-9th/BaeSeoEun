@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'lionproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['lionproject/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,7 +120,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR , 'blog',
+    'static'),
+]#현재static파일들이 어디에 있는지 경로써준것
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')#static파일을 어디에 모을건지
+#정적파일들을 편리하게 관리하려고 프로젝트폴더에 static파일들을 저장하는구나,,,,
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#이용자가 업로드한 파일을 모으는 곳
+MEDIA_URL = '/media/'
+#이용자에게 사진을 보여줄때 맨 앞에 보이는 url
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

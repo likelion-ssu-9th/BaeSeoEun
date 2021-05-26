@@ -13,12 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from blog.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path(' ', home, name="home"),
-    #path('<str:id>', detail, name="detail"),
-]
+    path('', home, name = "home"),#path이름은 home
+    path('blog/',include('blog.urls')),#blog.urls로이동
+
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)#개발할때마다 복붙하기#이게뭔지는 공식문서가서확인
+
+
+#url 1번,부모url
