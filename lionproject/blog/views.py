@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Blog
 from django.utils import timezone
+from .forms import BlogForm
+
 
 #model을 import를 받아오기
 # Create your views here.
@@ -8,33 +10,30 @@ from django.utils import timezone
 def home(request):
     blogs = Blog.objects.all()#객체를 만든다.
     return render(request,'home.html',{'blogs':blogs}) #reuqest받아서 home.html에 접근하겠다.,만든객체blogs을 불러와라
+
 def detail(request,id):
     blog = get_object_or_404(Blog, pk = id ) #객체생성=blog의 model을 가져온다,pk를 id로 가져온다.
-    return render(request,'detail.html',{'blog':blog})
-def new(request):
-    return render(request, 'new.html')
-def create(request):
-    new_blog = Blog()
-    new_blog.title = request.POST['title']
-    new_blog.writer = request.POST['writer']
-    new_blog.body = request.POST['body']
-    new_blog.pub_date = timezone.now()
-    new_blog.image = request.FILES['image']#폼데이터로 받아온 파일=('image')을 newblog의 이미지에 저장하기
-    new_blog.save() #저장
-    return redirect('detail',new_blog.id)#render대신쓴다. 누르면 넘어가게/redirectvsrender
+    return render(request,'detail.html', {'blog':blog})
 
-# def create(request):
-#     form = BlogForm(request.POST, request.FILES)
-#     if form.is_valid():
-#         new_blog = form.save(commit=False)
-#         new_blog.pub_date = timezone.now()
-#         new_blog.save()
-#         return redirect('detail', new_blog.id)
-#     return redirect('home')
+def new(request):
+    form = BlogForm() #입력받는공간(BlogForm)선언
+    return render(request, 'new.html', {'form':form})
+
+#redirect=>render대신쓴다. 누르면 넘어가게/redirectvsrender
+
+def create(request):#유효성검사이후에 데베에 저장하는 과정!form이 다해줌
+    form = BlogForm(request.POST, request.FILES)#form이라는 객체에 저장할때 POST랑FILES를 같이저장
+    if form.is_valid():#form이 유효한지
+        new_blog = form.save(commit=False)#유효하면 (완전저장x,commit=false) 임시저장 왜냐면 pub_date같이저장해줘야함
+        new_blog.pub_date = timezone.now()#timezone.now()를 통해 현재시간을 저장
+        new_blog.save()#완전저장
+        return redirect('detail', new_blog.id)#detail로 보내는 redirect
+    return redirect('home')#form이 유효하지않으면, 실패한 경우
 
 def edit(request, id): #수정할글의  id 정보필요
     edit_blog = Blog.objects.get(id=id)#model안의 객체들의 id값
     return render(request, 'edit.html', {'edit_blog': edit_blog})
+
 def update(request,id):
     update_blog = Blog()
     update_blog.title = request.POST['title']

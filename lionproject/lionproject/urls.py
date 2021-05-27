@@ -22,8 +22,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name = "home"),#path이름은 home
+    path('', home , name = "home"),#path이름은 home
     path('blog/',include('blog.urls')),#blog.urls로이동
+    path('account/',include('account.urls')),
 
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)#개발할때마다 복붙하기#이게뭔지는 공식문서가서확인
 
