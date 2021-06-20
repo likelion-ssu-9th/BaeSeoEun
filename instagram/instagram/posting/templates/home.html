@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSTAGRAM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script> 
+
+</head> -->
+
+    
+    <h1>INSTAGRAM에 오신것을 환영합니다</h1>
+    <div>
+        <a href="{%url 'new' %}">write posting</a>
+    </div>
+    <div class="container">
+    {% for posting in postings %}
+        <h1>{{posting.title}}</h1>
+        {{posting.id}}
+        {{posting.pub_date}}
+        {{posting.summary}}<a href="{%url 'detail' posting.id %}">...more</a>
+        {{posting.image}}
+    {% endfor %}
+    <div class="login_view">
+        <a class="login_view" href="{% url 'login' %}">로그인</a>
+    </div>
+    {%if user.is_authenticated %}
+    <div class="logout_view">
+        <a class="logout_view" href="{% url 'logout' %}">로그아웃</a>
+    </div>
+    {%endif%}
+    <div class="signup_view">
+        <a class="signup_view" href="{% url 'signup' %}">가입</a>
+    </div>
+    </div>
+{%endblock%}

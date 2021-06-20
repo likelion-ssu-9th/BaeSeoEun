@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Your Story</title>
+</head>
+<body>
+    <form action="{%url 'update' posting.id %}" method="POST">
+        {%csrf_token%}
+        <p>제목:<input type="text" name="title" value="{{posting.title}}"></p>
+        본문:<textarea name="body" id="" cols="30" rows="10">value="{{posting.body}}"</textarea>
+        <button type="submit">submit</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+  
+  <!-- <link href="./background.css" rel="stylesheet" type="text/css"/>
+  <link href="./feed.css" rel="stylesheet" type="text/css" /> 
+  <link rel="icon" href="../img/icon.png"> -->
+
+{% block content %}
+<h1>Post Your Feed</h1>
+<div>
+<form action="{%url 'create' %}" method="POST">
+        {%csrf_token%}
+        <p>제목:<input type="text" name="title"></p>
+        <p>작성자:<input type="text" name="writer" value="{{posting.id}}"></p>
+        본문:<textarea name="body" id="" cols="30" rows="10"></textarea>
+        <button type="submit">submit</button>
+    </form>
+</div>
+    {%endblock%}
+
