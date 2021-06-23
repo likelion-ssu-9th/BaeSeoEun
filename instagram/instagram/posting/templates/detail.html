@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+  {%block head %}
+    <link href="{%static 'background.css' %}" rel="stylesheet"/>
+    <link href="{%static 'feed.css' %}" rel="stylesheet"/> 
+  {% endblock %}
+
+  {% block content %}
+ 
+  <div class="main">
+    <section class="cardViewSection"> <!--논리적으로 관계가 있는 문서를 분리-->
+        <div class="cardView">
+            <header>
+                <div class="userNickName"><h1>{{posting.title}}</h1></div>
+            </header>
+            <div class="cardImage">
+                <img src="{% static 'lionface.png'%}" alt="sample">
+            </div>
+            <div class="cardInfo">
+                <div class="infoLeft">
+                  <img class="feedImg" src="{% static 'liked.png' %}" alt="좋아용" />
+                  <img class="feedImg" src="{% static 'comment.png' %}" alt="코멘트" />
+                  <img class="feedImg" src="{% static 'upload.png' %}" alt="업로드" />
+                </div>
+                <div class="infoRight">
+                  <img class="feedImg" src="{% static 'edit.png' %}" alt="수정" />
+                  <img class="feedImg" src="{% static 'delete.png' %}" alt="삭제" />
+                </div>
+            </div>
+            <div class="date">
+                {{posting.body}}<br>
+                {{posting.pub_date}}<br>
+            </div>
+            <div class="comment">
+                comment1<br>
+                comment2<br>
+            </div>
+            <div class="comment_form">
+                <form action="">
+                    <input type="text" placeholder="댓글 입력..">
+                </form>
+            </div>
+            <div class="button">
+            <a href="{%url 'edit' posting.id %}">수정하기</a>
+            <a href="{%url 'delete' posting.id %}">삭제하기</a>
+        </div>
+        </div>
+    </section> 
+  </div>
+{%endblock%}

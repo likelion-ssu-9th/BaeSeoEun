@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  {% block head %}
+  {% endblock %}
+  <link rel="stylesheet" href="{% static 'base.css' %}">
+  <link rel="icon" href="{% static 'icon.png' %}">
+  <title>Instagram</title>
+</head>
+<body>
+  <header>
+    <div class="left_box">
+      <div class="favicon_frame">
+        <a class="faviconFrame" href="{% url 'home' %}"><img src="{% static 'line_favicon.png' %}" alt="인스타 로고" /></a>
+      </div>
+      <div class="line">
+        <a class="logo" href="{%url 'login' %}" ><img src="{% static 'logo_text.png' %}" alt="인스타 글씨" /></a>
+      </div>
+    </div>
+    <div class="right_box">
+
+      <div class="heart_box">
+        <a class="heart" href="{% url 'new' %}"> <img src="{% static 'new.png' %}" alt="글작성"></a>
+      </div>
+      <div class="myInfo_box">
+         
+        <a class="myInfo" href="{% url 'profile' %}"><img src="{% static 'myinfo.png' %}" alt="내 프로필"></a>
+        
+      </form>
+      </div>
+    </div>
+  </header>
+ 
+  <div class="container"> 
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+</html>
