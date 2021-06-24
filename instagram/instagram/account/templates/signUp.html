@@ -16,7 +16,7 @@
         <hr class="line">
         <form action="{% url 'signup' %}" method="POST">
             {%csrf_token%}
-        <input type="text" class="userSignUp" placeholder="휴대폰 번호 또는 이메일 주소" name="username">
+        <input type="text" class="userSignUp" placeholder="휴대폰 번호 또는 이메일 주소" name="number">
         <input type="text" class="userSignUp" placeholder="성명" name="name">
         <input type="text" class="userSignUp" placeholder="사용자 이름" name="nickname">
         <input type="password" class="userSignUp" placeholder="비밀번호" name="password">

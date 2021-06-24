@@ -13,6 +13,9 @@
 
     
     <h1>INSTAGRAM에 오신것을 환영합니다</h1>
+    {%if user.is_authenticated %}
+    안녕하세요. {{user.username}}님
+    {%endif%}
     <div>
         <a href="{%url 'new' %}">write posting</a>
     </div>
@@ -24,16 +27,20 @@
         {{posting.summary}}<a href="{%url 'detail' posting.id %}">...more</a>
         {{posting.image}}
     {% endfor %}
+    {%if not user.is_authenticated%}
     <div class="login_view">
         <a class="login_view" href="{% url 'login' %}">로그인</a>
     </div>
-    {%if user.is_authenticated %}
-    <div class="logout_view">
-        <a class="logout_view" href="{% url 'logout' %}">로그아웃</a>
-    </div>
-    {%endif%}
     <div class="signup_view">
         <a class="signup_view" href="{% url 'signup' %}">가입</a>
     </div>
+    {%endif%}
+
+    {%if user.is_authenticated %}
+        <div class="logout_view">
+            <a class="logout_view" href="{% url 'logout' %}">로그아웃</a>
+        </div>
+    {%endif%}
+    
     </div>
 {%endblock%}

@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name="home"),
     path('<str:id>',detail,name="detail"),#str은 자료형, id= 매개변수로 지정한 이름
-    #path('posting/',include('posting.urls')),
+    # path('posting/',include('posting.urls')),
     path('account/',include('account.urls')),
     path('new/', new , name = "new" ),
     path('create/', create, name= "create"),

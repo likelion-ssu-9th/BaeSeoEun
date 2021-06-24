@@ -16,7 +16,7 @@
 
         <form action="{% url 'login' %}" method="POST" >
             {%csrf_token%}
-        <input type="text" class="userLogin" placeholder="전화번호, 사용자 이름 또는 이메일" name="username">
+        <input type="text" class="userLogin" placeholder="전화번호, 사용자 이름 또는 이메일" name="number">
         <input type="password" class="userLogin" placeholder="비밀번호" name="password">
         <a id="loginButton" href="{% url 'home' %}">로그인</a>
     </form>
